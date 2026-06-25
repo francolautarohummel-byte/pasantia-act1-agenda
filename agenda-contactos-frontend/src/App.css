@@ -1,0 +1,191 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO (Soporte Light Mode por defecto)
+   ========================================================================== */
+:root {
+  --bg-primary: #f8fafc;        /* Gris ultra claro y limpio */
+  --bg-surface: #ffffff;        /* Blanco para tarjetas y contenedores */
+  --border-color: #e2e8f0;      /* Bordes sutiles slate-200 */
+  
+  --text-main: #0f172a;         /* Texto principal casi negro */
+  --text-muted: #64748b;        /* Texto secundario slate-500 */
+  
+  /* Paleta de colores llamativa y moderna */
+  --primary: #4f46e5;           /* Índigo moderno */
+  --primary-hover: #4338ca;
+  --success: #10b981;           /* Esmeralda */
+  --success-hover: #059669;
+  --warning: #f59e0b;           /* Ámbar */
+  --warning-hover: #d97706;
+  --danger: #ef4444;            /* Rojo suave Rose/Red */
+  --danger-hover: #dc2626;
+
+  --radius-lg: 16px;            /* Bordes bien redondeados modernos */
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   2. VARIANTES PARA DARK MODE (Automático)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0f172a;      /* Fondo slate-900 */
+    --bg-surface: #1e293b;      /* Superficie slate-800 */
+    --border-color: #334155;    /* Bordes slate-700 */
+    
+    --text-main: #f8fafc;       /* Texto blanco slate-50 */
+    --text-muted: #94a3b8;      /* Texto secundario slate-400 */
+    
+    --primary: #6366f1;         /* Índigo un poco más brillante para contraste */
+    --primary-hover: #4f46e5;
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -4px rgba(0,0,0,0.3);
+  }
+}
+
+/* ==========================================================================
+   3. ESTILOS BASE GENERALES
+   ========================================================================== */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: var(--transition);
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* ==========================================================================
+   4. COMPONENTES: BOTONES (Átomos)
+   ========================================================================== */
+.btn {
+  font-weight: 500;
+  border-radius: var(--radius-md) !important; /* Forzamos el redondeado moderno */
+  padding: 0.6rem 1.2rem;
+  transition: var(--transition);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary { background-color: var(--primary) !important; color: white !important; }
+.btn-primary:hover { background-color: var(--primary-hover) !important; transform: translateY(-1px); }
+
+.btn-success { background-color: var(--success) !important; color: white !important; }
+.btn-success:hover { background-color: var(--success-hover) !important; transform: translateY(-1px); }
+
+.btn-outline-warning { color: var(--warning) !important; border-color: var(--warning) !important; background: transparent; }
+.btn-outline-warning:hover { background-color: var(--warning) !important; color: white !important; }
+
+.btn-outline-danger { color: var(--danger) !important; border-color: var(--danger) !important; background: transparent; }
+.btn-outline-danger:hover { background-color: var(--danger) !important; color: white !important; }
+
+/* ==========================================================================
+   5. COMPONENTES: INPUTS Y FORMULARIOS (Moléculas)
+   ========================================================================== */
+.form-control {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.75rem 1rem;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15) !important;
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.form-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   6. COMPONENTES: TARJETAS Y CONTENEDORES (Moléculas/Organismos)
+   ========================================================================== */
+.card {
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+/* Efecto hover interactivo en las tarjetas de contactos */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.card-title {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* Contenedor del Formulario colapsable de creación */
+.bg-light {
+  background-color: var(--bg-surface) !important;
+  border: 1px dashed var(--primary) !important; /* Borde punteado cool para el creador */
+}
+
+/* ==========================================================================
+   7. COMPONENTES GLOBALES: NAVBAR Y ALERTAS
+   ========================================================================== */
+.navbar {
+  background-color: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem 1.5rem;
+}
+
+.navbar-brand {
+  color: var(--text-main) !important;
+  font-weight: 700;
+}
+
+.nav-link {
+  color: var(--text-muted) !important;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem !important;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--primary) !important;
+  background-color: rgba(79, 70, 229, 0.08);
+}
+
+.alert-info {
+  background-color: rgba(79, 70, 229, 0.05) !important;
+  border: 1px solid rgba(79, 70, 229, 0.15) !important;
+  color: var(--primary) !important;
+  border-radius: var(--radius-md);
+}
